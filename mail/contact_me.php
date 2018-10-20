@@ -4,6 +4,11 @@ if(empty($_POST['name']) || empty($_POST['email']) || empty($_POST['phone']) || 
   http_response_code(500);
   exit();
 }
+$mail->isSMTP();
+$mail->Host = 'relay-hosting.secureserver.net';
+$mail->Port = 25;
+$mail->SMTPAuth = false;
+$mail->SMTPSecure = false;
 
 $name = strip_tags(htmlspecialchars($_POST['name']));
 $email = strip_tags(htmlspecialchars($_POST['email']));
@@ -19,4 +24,5 @@ $header .= "Reply-To: $email";
 
 if(!mail($to, $subject, $body, $header))
   http_response_code(500);
+
 ?>
